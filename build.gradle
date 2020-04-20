@@ -27,14 +27,17 @@ ext {
 	ioCucumberVersion = "5.0.0-RC4"
 	swaggerVersion = "2.9.2"
 	jacocoVersion = "0.8.5"
+	postgresEmbedTest = "1.5.3"
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	// Postgres database
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation "io.zonky.test:embedded-database-spring-test:${postgresEmbedTest}"
 	// Cucumber Dependencies for BDD
 	testImplementation "io.cucumber:cucumber-java:${ioCucumberVersion}"
 	testImplementation "io.cucumber:cucumber-junit:${ioCucumberVersion}"

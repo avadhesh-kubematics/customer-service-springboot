@@ -10,6 +10,6 @@ import org.springframework.web.client.RestTemplate;
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
 public abstract class SpringIntegration {
-    protected static final String DEFAULTURL = "http://localhost:8081/";
+    protected static final String DEFAULTURL = "http://localhost:8081/customer/";
     protected RestTemplate restTemplate = new RestTemplate();
 }

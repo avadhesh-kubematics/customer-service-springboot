@@ -18,6 +18,7 @@ public class StepDefinition extends SpringIntegration {
 
     private CustomerVO customer = new CustomerVO();
     private ResponseEntity<Customer> createResponseEntityResponseEntity;
+    private ResponseEntity<Customer> getCustomerResponseEntity;
 
     @Given("Customer provides its first name {string} and surname {string}")
     public void customer_provides_its_first_name_and_surname(String firstName, String surname) {
@@ -37,4 +38,24 @@ public class StepDefinition extends SpringIntegration {
         assertEquals("Rajput", createResponseEntityResponseEntity.getBody().getSurname());
         assertNotNull(createResponseEntityResponseEntity.getBody().getId());
     }
+
+    @Given("Customer provides a valid customer id")
+    public void customer_provides_a_valid_customer_id() {
+        this.customer_provides_its_first_name_and_surname("Cloud Native", "Developer");
+        this.the_customer_makes_a_call_to_store_the_details();
+    }
+
+    @When("The customer makes a call to get the customer details")
+    public void the_customer_makes_a_call_to_get_the_customer_details() {
+        UUID customerId = createResponseEntityResponseEntity.getBody().getId();
+        getCustomerResponseEntity = restTemplate.getForEntity(DEFAULTURL + "search/" + customerId, Customer.class);
+    }
+
+    @Then("The API should return the associated Customer Data")
+    public void the_API_should_return_the_associated_Customer_Data() {
+        assertEquals(getCustomerResponseEntity.getStatusCodeValue(), OK.value());
+        assertEquals("Cloud Native", getCustomerResponseEntity.getBody().getFirstName());
+        assertEquals("Developer", getCustomerResponseEntity.getBody().getSurname());
+    }
+
 }

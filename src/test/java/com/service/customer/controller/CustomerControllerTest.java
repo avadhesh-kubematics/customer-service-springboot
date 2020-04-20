@@ -42,4 +42,22 @@ class CustomerControllerTest {
         assertEquals(customerData, actualCustomerData);
     }
 
+    @Test
+    void getCustomer_whenCustomerIdsPassed_shouldCallServiceWithGivenInput() {
+        UUID customerId = UUID.randomUUID();
+
+        customerController.getCustomer(customerId);
+
+        verify(mockCustomerService, times(1)).getCustomer(customerId);
+    }
+
+    @Test
+    void getCustomer_whenAValidCustomerIdIsPassed_shouldReturnCustomerData() {
+        UUID customerId = customerData.getId();
+        when(mockCustomerService.getCustomer(customerId)).thenReturn(customerData);
+
+        Customer actualCustomer = customerController.getCustomer(customerId);
+
+        assertEquals(customerData, actualCustomer);
+    }
 }

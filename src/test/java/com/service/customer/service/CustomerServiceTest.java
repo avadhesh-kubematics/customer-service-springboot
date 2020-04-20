@@ -49,4 +49,24 @@ class CustomerServiceTest {
 
         assertEquals(expectedCustomer, actual);
     }
+
+    @Test
+    void getCustomer_whenCustomerIdPassed_shouldCallTheRepositoryWithSameCustomerId() {
+        UUID customerId = customerData.getId();
+        when(mockCustomerRepository.findById(customerId)).thenReturn(java.util.Optional.ofNullable(customerData));
+
+        customerService.getCustomer(customerId);
+
+        verify(mockCustomerRepository, times(1)).findById(customerId);
+    }
+
+    @Test
+    void getCustomer_whenCustomerIdPassed_shouldCallTheRepositoryAndReturnCustomerData() {
+        UUID id = customerData.getId();
+        when(mockCustomerRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(customerData));
+
+        Customer actualCustomer = customerService.getCustomer(id);
+
+        assertEquals(customerData, actualCustomer);
+    }
 }

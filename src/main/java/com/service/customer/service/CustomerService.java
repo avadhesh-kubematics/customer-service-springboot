@@ -34,7 +34,7 @@ public class CustomerService {
         return savedCustomer;
     }
 
-    public Customer getCustomer(UUID customerId) {
+    public Customer getCustomer(int customerId) {
         log.info("CustomerService : getCustomer : Init..");
         log.debug("CustomerService : getCustomer : Finding customer with Id : {}", customerId);
         Optional<Customer> customerOptional = customerRepository.findById(customerId);

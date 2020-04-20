@@ -30,7 +30,7 @@ public class CustomerController {
 
     @GetMapping("/search/{customerId}")
     @ResponseStatus(HttpStatus.OK)
-    public Customer getCustomer(@PathVariable UUID customerId) {
+    public Customer getCustomer(@PathVariable int customerId) {
         log.info("CustomerController : getCustomer : Init..");
         Customer customer = customerService.getCustomer(customerId);
         log.info("CustomerController : getCustomer : End..");

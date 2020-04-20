@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CustomerRepositoryIT {
 
     @Autowired
-    private CustomerRepository personRepository;
+    private CustomerRepository customerRepository;
     private Customer customer = getCustomerData();
 
     @Test
@@ -27,7 +27,7 @@ public class CustomerRepositoryIT {
         customer.setFirstName("Iron");
         customer.setSurname("Man");
 
-        Customer storedCustomer = personRepository.save(customer);
+        Customer storedCustomer = customerRepository.save(customer);
 
         assertEquals(storedCustomer.getFirstName(), "Iron");
         assertEquals(storedCustomer.getSurname(), "Man");
@@ -37,9 +37,9 @@ public class CustomerRepositoryIT {
     public void getOne_whenCustomerIdIsPassed_shouldReturnTheCustomerData() {
         customer.setFirstName("Steve");
         customer.setSurname("Rogers");
-        Customer storedCustomer = personRepository.save(customer);
+        Customer storedCustomer = customerRepository.save(customer);
 
-        Customer actualCustomer = personRepository.getOne(customer.getId());
+        Customer actualCustomer = customerRepository.getOne(customer.getId());
 
         assertEquals(customer, actualCustomer);
     }

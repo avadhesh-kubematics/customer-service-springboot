@@ -17,7 +17,8 @@ class CustomerControllerTest {
     private CustomerController customerController;
     private CustomerService mockCustomerService;
     private CustomerVO mockCustomer;
-    private Customer customerData = getCustomerData();;
+    private Customer customerData = getCustomerData();
+    private int CUSTOMER_ID = 1000;
 
     @BeforeEach
     void setUp() {
@@ -44,19 +45,16 @@ class CustomerControllerTest {
 
     @Test
     void getCustomer_whenCustomerIdsPassed_shouldCallServiceWithGivenInput() {
-        UUID customerId = UUID.randomUUID();
+        customerController.getCustomer(CUSTOMER_ID);
 
-        customerController.getCustomer(customerId);
-
-        verify(mockCustomerService, times(1)).getCustomer(customerId);
+        verify(mockCustomerService, times(1)).getCustomer(CUSTOMER_ID);
     }
 
     @Test
     void getCustomer_whenAValidCustomerIdIsPassed_shouldReturnCustomerData() {
-        UUID customerId = customerData.getId();
-        when(mockCustomerService.getCustomer(customerId)).thenReturn(customerData);
+        when(mockCustomerService.getCustomer(CUSTOMER_ID)).thenReturn(customerData);
 
-        Customer actualCustomer = customerController.getCustomer(customerId);
+        Customer actualCustomer = customerController.getCustomer(CUSTOMER_ID);
 
         assertEquals(customerData, actualCustomer);
     }

@@ -7,8 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.http.ResponseEntity;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -28,7 +26,7 @@ public class StepDefinition extends SpringIntegration {
 
     @When("The customer makes a call to store the details")
     public void the_customer_makes_a_call_to_store_the_details() {
-        createResponseEntityResponseEntity = restTemplate.postForEntity(DEFAULTURL + "/create", customer, Customer.class);
+        createResponseEntityResponseEntity = restTemplate.postForEntity(DEFAULT_URL + "/create", customer, Customer.class);
     }
 
     @Then("The API should return the Customer Data with Id")
@@ -47,8 +45,8 @@ public class StepDefinition extends SpringIntegration {
 
     @When("The customer makes a call to get the customer details")
     public void the_customer_makes_a_call_to_get_the_customer_details() {
-        UUID customerId = createResponseEntityResponseEntity.getBody().getId();
-        getCustomerResponseEntity = restTemplate.getForEntity(DEFAULTURL + "search/" + customerId, Customer.class);
+        int customerId = createResponseEntityResponseEntity.getBody().getId();
+        getCustomerResponseEntity = restTemplate.getForEntity(DEFAULT_URL + "search/" + customerId, Customer.class);
     }
 
     @Then("The API should return the associated Customer Data")

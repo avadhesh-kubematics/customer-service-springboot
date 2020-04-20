@@ -1,23 +1,25 @@
 package com.service.customer.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
 public class Customer {
     @Id
-    @Type(type = "pg-uuid")
-    private UUID id;
+    @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq",
+            allocationSize = 1, initialValue = 1000)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
+    private Integer id;
     private String firstName;
     private String surname;
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date createdAt;
 
-    public Customer() {
-        this.id = UUID.randomUUID();
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
     }
 }

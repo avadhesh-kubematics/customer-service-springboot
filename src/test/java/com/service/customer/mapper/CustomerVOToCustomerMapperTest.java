@@ -26,7 +26,6 @@ class CustomerVOToCustomerMapperTest {
 
         assertEquals("Abhishek", customerDAO.getFirstName());
         assertEquals("Rajput", customerDAO.getSurname());
-        assertNotNull(customerDAO.getId());
     }
 
     @Test

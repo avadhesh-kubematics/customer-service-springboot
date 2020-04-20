@@ -8,8 +8,6 @@ import com.service.customer.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
 import static com.service.customer.helper.TestData.getCustomerData;
 import static com.service.customer.helper.TestData.getCustomerVOData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,6 +20,7 @@ class CustomerServiceTest {
     private CustomerVOToCustomerMapper mockCustomerVOToCustomerMapper;
     private CustomerVO customerVOData = getCustomerVOData();
     private Customer customerData = getCustomerData();
+    private int CUSTOMER_ID = 1000;
 
     @BeforeEach
     void setUp() {
@@ -52,20 +51,18 @@ class CustomerServiceTest {
 
     @Test
     void getCustomer_whenCustomerIdPassed_shouldCallTheRepositoryWithSameCustomerId() {
-        UUID customerId = customerData.getId();
-        when(mockCustomerRepository.findById(customerId)).thenReturn(java.util.Optional.ofNullable(customerData));
+        when(mockCustomerRepository.findById(CUSTOMER_ID)).thenReturn(java.util.Optional.ofNullable(customerData));
 
-        customerService.getCustomer(customerId);
+        customerService.getCustomer(CUSTOMER_ID);
 
-        verify(mockCustomerRepository, times(1)).findById(customerId);
+        verify(mockCustomerRepository, times(1)).findById(CUSTOMER_ID);
     }
 
     @Test
     void getCustomer_whenCustomerIdPassed_shouldCallTheRepositoryAndReturnCustomerData() {
-        UUID id = customerData.getId();
-        when(mockCustomerRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(customerData));
+        when(mockCustomerRepository.findById(CUSTOMER_ID)).thenReturn(java.util.Optional.ofNullable(customerData));
 
-        Customer actualCustomer = customerService.getCustomer(id);
+        Customer actualCustomer = customerService.getCustomer(CUSTOMER_ID);
 
         assertEquals(customerData, actualCustomer);
     }

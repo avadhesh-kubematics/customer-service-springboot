@@ -10,5 +10,6 @@ import org.mapstruct.Mapping;
 public interface CustomerVOToCustomerMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     Customer map(CustomerVO customer);
 }

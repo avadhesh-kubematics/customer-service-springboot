@@ -8,6 +8,8 @@ import java.util.Date;
 @Data
 @Entity
 public class Customer {
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date createdAt;
     @Id
     @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq",
             allocationSize = 1, initialValue = 1000)
@@ -15,8 +17,6 @@ public class Customer {
     private Integer id;
     private String firstName;
     private String surname;
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date createdAt;
 
     @PrePersist
     protected void onCreate() {

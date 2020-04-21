@@ -5,10 +5,11 @@ import com.service.customer.model.Customer;
 import com.service.customer.model.CustomerVO;
 import com.service.customer.repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -38,6 +39,7 @@ public class CustomerService {
         log.info("CustomerService : getCustomer : Init..");
         log.debug("CustomerService : getCustomer : Finding customer with Id : {}", customerId);
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        customerOptional.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Customer not found"));
 
         Customer customer = (Customer) customerOptional.get();
 

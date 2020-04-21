@@ -6,9 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CustomerApplicationTests {
 
-	@Test
-	void main_contextLoad() {
-		System.setProperty("server.port", "8082");
-		CustomerApplication.main(new String[]{});
-	}
+    @Test
+    void main_contextLoad() {
+        System.setProperty("server.port", "8082");
+        CustomerApplication.main(new String[]{});
+    }
 }

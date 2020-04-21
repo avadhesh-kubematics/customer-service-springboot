@@ -6,6 +6,6 @@ Feature: Create and Get a Customer
     Then The API should return the Customer Data with Id
 
   Scenario: When a valid customer id is passed should return the customer data
-    Given Customer provides a valid customer id
+    Given Customer provides a valid customer id 1000
     When The customer makes a call to get the customer details
     Then The API should return the associated Customer Data

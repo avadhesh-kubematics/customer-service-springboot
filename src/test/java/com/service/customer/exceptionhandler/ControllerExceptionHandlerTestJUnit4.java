@@ -27,7 +27,6 @@ public class ControllerExceptionHandlerTestJUnit4 {
     public void methodArgumentNotValidException() throws NoSuchMethodException {
         BindingResult bindingResult = new MapBindingResult(new HashMap<>(), "CustomerVO");
         bindingResult.addError(new FieldError("CustomerVO", "firstName", "Invalid name"));
-        bindingResult.addError(new FieldError("objectName", "surname", "Invalid surname"));
 
         Method method = this.getClass().getMethod("setUp", (Class[]) null);
         MethodParameter parameter = new MethodParameter(method, -1);
@@ -38,6 +37,6 @@ public class ControllerExceptionHandlerTestJUnit4 {
         ResponseEntity responseEntity = exceptionHandler.handleMethodArgumentNotValidException(exception);
 
         assertEquals(400, responseEntity.getStatusCodeValue());
-        assertEquals("Invalid name Invalid surname : valid input should be alphabetical and less than 20 characters", responseEntity.getBody().toString());
+        assertEquals("Invalid name : valid input should be alphabetic and less than 20 characters", responseEntity.getBody().toString());
     }
 }

@@ -1,4 +1,4 @@
-package com.service.customer.e2e;
+package com.service.customer.helper;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;

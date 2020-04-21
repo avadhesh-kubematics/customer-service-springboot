@@ -28,7 +28,7 @@ public class ControllerExceptionHandler {
         StringBuilder errorMessage = new StringBuilder();
         exception.getBindingResult().getAllErrors().forEach(error ->
                 errorMessage.append(error.getDefaultMessage()).append(" "));
-        errorMessage.append(": valid input should be alphabetical and less than 20 characters");
+        errorMessage.append(": valid input should be alphabetic and less than 20 characters");
 
         return new ResponseEntity(errorMessage.toString(), HttpStatus.BAD_REQUEST);
     }

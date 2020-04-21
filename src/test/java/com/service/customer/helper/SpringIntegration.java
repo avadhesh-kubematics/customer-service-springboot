@@ -1,4 +1,4 @@
-package com.service.customer.e2e;
+package com.service.customer.helper;
 
 import com.service.customer.CustomerApplication;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;

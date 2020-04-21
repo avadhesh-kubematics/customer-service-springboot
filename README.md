@@ -54,9 +54,9 @@ Two ways to install Postgres
 docker ps
 ```
 
-- Clone this repo and open in your favorite IDE. Then update the [application.yml](application.yml) with the postgres password.
+- Clone this repo and open in your favorite IDE. Then update the [application.yml](/src/main/resources/application.yml) with the postgres password.
 
-- To start the application open [CustomerServiceApplication.java](CustomerServiceApplication.java) and in your IDE start run the application.
+- To start the application open [CustomerApplication.java](/src/main/java/com/service/customer/CustomerApplication.java) and in your IDE start run the application.
 
 - If you wish to start the application from CLI run below command:
 

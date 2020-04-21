@@ -1,5 +1,8 @@
 package com.service.customer.e2e;
 
+import com.service.customer.helper.CustomResponseEntity;
+import com.service.customer.helper.SpringIntegration;
+import com.service.customer.helper.TestContextInterface;
 import com.service.customer.model.Customer;
 import com.service.customer.model.CustomerVO;
 import io.cucumber.java.en.Given;

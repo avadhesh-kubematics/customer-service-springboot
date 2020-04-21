@@ -1,6 +1,6 @@
-package com.service.customer.e2e;
+package com.service.customer.helper;
 
-import static com.service.customer.e2e.TestContext.CONTEXT;
+import static com.service.customer.helper.TestContext.CONTEXT;
 
 public interface TestContextInterface {
     default TestContext testContext() {

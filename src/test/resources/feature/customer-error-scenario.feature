@@ -1,9 +1,9 @@
 Feature: Error Scenarios
 
   Scenario: When invalid customer details are passed should return error
-    Given Customer provides its first name "@bhi$h€ksr01" and surname "r@jput|"
+    Given Customer provides its first name "@bhi$h€ksr01" and surname "rajput"
     When The customer makes a call to store the details
-    Then The API should return error "Invalid name Invalid surname : valid input should be alphabetical and less than 20 characters" and status code 400
+    Then The API should return error "Invalid name : valid input should be alphabetic and less than 20 characters" and status code 400
 
   Scenario: When a non existing customer id is passed
     Given Customer provides a valid customer id "1001"

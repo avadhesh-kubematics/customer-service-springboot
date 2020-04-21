@@ -2,3 +2,7 @@
 /.idea/
 /build/
 /reports/
+.classpath
+.project
+.settings/
+/bin

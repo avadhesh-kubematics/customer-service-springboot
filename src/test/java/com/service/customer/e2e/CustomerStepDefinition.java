@@ -21,7 +21,6 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
     private CustomerVO customer = new CustomerVO();
     private ResponseEntity<Customer> createResponseEntityResponseEntity;
     private ResponseEntity<Customer> getCustomerResponseEntity;
-    private int customerId;
 
     @Given("Customer provides its first name {string} and surname {string}")
     public void customer_provides_its_first_name_and_surname(String firstName, String surname) {
@@ -43,16 +42,16 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
         assertNotNull(customerResponse.getId());
     }
 
-    @Given("Customer provides a valid customer id {int}")
-    public void customer_provides_a_valid_customer_id(int customerId) {
-        this.customerId = customerId;
+    @Given("Customer provides a valid customer id {string}")
+    public void customer_provides_a_valid_customer_id(String customerId) {
+        testContext().set("customerId", customerId);
     }
 
     @When("The customer makes a call to get the customer details")
     public void the_customer_makes_a_call_to_get_the_customer_details() {
 
         try {
-            getCustomerResponseEntity = restTemplate.getForEntity(DEFAULT_URL + "search/" + this.customerId, Customer.class);
+            getCustomerResponseEntity = restTemplate.getForEntity(DEFAULT_URL + "search/" + testContext().get("customerId"), Customer.class);
         } catch (HttpClientErrorException exception) {
             CustomResponseEntity customResponseEntity = new CustomResponseEntity();
             customResponseEntity.setStatusCode(exception.getRawStatusCode());
@@ -67,7 +66,8 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
         Customer customerResponse = getCustomerResponseEntity.getBody();
         assertEquals("Abhishek", customerResponse.getFirstName());
         assertEquals("Rajput", customerResponse.getSurname());
-        assertEquals(this.customerId, customerResponse.getId());
+        assertEquals(1000, customerResponse.getId());
+        testContext().reset();
     }
 
     @Override

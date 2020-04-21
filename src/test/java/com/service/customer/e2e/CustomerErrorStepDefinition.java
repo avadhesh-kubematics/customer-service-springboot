@@ -1,5 +1,6 @@
 package com.service.customer.e2e;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.nl.En;
 
@@ -14,6 +15,13 @@ public class CustomerErrorStepDefinition implements En, TestContextInterface {
         CustomResponseEntity payload = testContext().getPayload(CustomResponseEntity.class);
         assertEquals(expectedStatusCode, payload.getStatusCode());
         assertEquals(expectedErrorMsg, payload.getResponseMessage());
+        testContext().reset();
+    }
+
+    @Given("Customer provides a invalid customer id {string}")
+    public void customer_provides_a_invalid_customer_id(String customerId) {
+        testContext().set("customerId", customerId);
+        testContext().reset();
     }
 
     @Override

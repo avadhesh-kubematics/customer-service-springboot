@@ -16,4 +16,9 @@ public class ControllerExceptionHandler {
         }
         return new ResponseEntity("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity handleNumberFormatException(NumberFormatException numberFormatException) {
+        return new ResponseEntity("Bad Request, invalid customer id", HttpStatus.BAD_REQUEST);
+    }
 }

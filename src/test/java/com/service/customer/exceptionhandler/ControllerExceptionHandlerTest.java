@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ControllerExceptionHandlerTest {
     private ControllerExceptionHandler controllerExceptionHandler;
@@ -38,4 +38,14 @@ class ControllerExceptionHandlerTest {
         assertEquals("Internal Server Error", responseEntity.getBody());
     }
 
+    @Test
+    void handleNumberFormatException_shouldReturn400AndBadRequestErrorMessage_whenANonIntNumberIsPassed() {
+        NumberFormatException numberFormatException =
+                new NumberFormatException("Bad Request, invalid customer id");
+
+        ResponseEntity responseEntity = controllerExceptionHandler.handleNumberFormatException(numberFormatException);
+
+        assertEquals(400, responseEntity.getStatusCodeValue());
+        assertEquals("Bad Request, invalid customer id", responseEntity.getBody());
+    }
 }

@@ -21,7 +21,9 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.CREATED)
     public Customer create(@RequestBody CustomerVO customerVO) {
         log.info("CustomerController : create : Init..");
+
         Customer customer = customerService.create(customerVO);
+
         log.info("CustomerController : create : End..");
         return customer;
     }
@@ -30,7 +32,9 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     public Customer getCustomer(@PathVariable int customerId) {
         log.info("CustomerController : getCustomer : Init..");
+
         Customer customer = customerService.getCustomer(customerId);
+
         log.info("CustomerController : getCustomer : End..");
         return customer;
     }

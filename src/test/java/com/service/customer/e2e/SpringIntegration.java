@@ -12,6 +12,6 @@ import org.springframework.web.client.RestTemplate;
 @ActiveProfiles("test")
 @AutoConfigureEmbeddedDatabase
 public abstract class SpringIntegration {
-    protected static final String DEFAULT_URL = "http://localhost:8081/customer/";
+    protected static final String DEFAULT_URL = "http://localhost:9091/customer/";
     protected RestTemplate restTemplate = new RestTemplate();
 }

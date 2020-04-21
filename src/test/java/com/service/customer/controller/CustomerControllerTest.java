@@ -6,8 +6,16 @@ import com.service.customer.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import static com.service.customer.helper.TestData.getCustomerData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class CustomerControllerTest {
@@ -55,5 +63,39 @@ class CustomerControllerTest {
         Customer actualCustomer = customerController.getCustomer(CUSTOMER_ID);
 
         assertEquals(customerData, actualCustomer);
+    }
+
+    @Test
+    void create_whenInvalidCustomerDataIsPassed_shouldReturnConstraintViolationError() {
+        CustomerVO customerVO = new CustomerVO();
+        customerVO.setFirstName("@bhi$h€ksr01");
+        customerVO.setSurname("r@jput|");
+
+        List<String> errors = getConstraintErrors(customerVO);
+
+        assertTrue(errors.contains("Invalid name"));
+        assertTrue(errors.contains("Invalid surname"));
+
+    }
+
+    @Test
+    void create_whenNullPassedInCustomerData_shouldReturnConstraintViolationError() {
+        CustomerVO customerVO = new CustomerVO();
+        customerVO.setFirstName(null);
+        customerVO.setSurname(null);
+
+        List<String> errors = getConstraintErrors(customerVO);
+
+        assertTrue(errors.contains("Name cannot be blank"));
+        assertTrue(errors.contains("Surname cannot be blank"));
+
+    }
+
+    private List<String> getConstraintErrors(CustomerVO customerVO) {
+        List<String> errors = new ArrayList<>();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Set<ConstraintViolation<CustomerVO>> constraintViolations = factory.getValidator().validate(customerVO);
+        constraintViolations.forEach(constraintViolation -> errors.add(constraintViolation.getMessage()));
+        return errors;
     }
 }

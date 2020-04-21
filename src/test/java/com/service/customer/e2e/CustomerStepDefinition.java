@@ -21,6 +21,7 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
     private CustomerVO customer = new CustomerVO();
     private ResponseEntity<Customer> createResponseEntityResponseEntity;
     private ResponseEntity<Customer> getCustomerResponseEntity;
+    private CustomResponseEntity customResponseEntity = new CustomResponseEntity();
 
     @Given("Customer provides its first name {string} and surname {string}")
     public void customer_provides_its_first_name_and_surname(String firstName, String surname) {
@@ -30,7 +31,13 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
 
     @When("The customer makes a call to store the details")
     public void the_customer_makes_a_call_to_store_the_details() {
-        createResponseEntityResponseEntity = restTemplate.postForEntity(DEFAULT_URL + "/create", customer, Customer.class);
+        try {
+            createResponseEntityResponseEntity = restTemplate.postForEntity(DEFAULT_URL + "/create", customer, Customer.class);
+        } catch (HttpClientErrorException exception) {
+            customResponseEntity.setStatusCode(exception.getRawStatusCode());
+            customResponseEntity.setResponseMessage(exception.getResponseBodyAsString());
+            testContext().setPayload(customResponseEntity);
+        }
     }
 
     @Then("The API should return the Customer Data with Id")
@@ -53,7 +60,6 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
         try {
             getCustomerResponseEntity = restTemplate.getForEntity(DEFAULT_URL + "search/" + testContext().get("customerId"), Customer.class);
         } catch (HttpClientErrorException exception) {
-            CustomResponseEntity customResponseEntity = new CustomResponseEntity();
             customResponseEntity.setStatusCode(exception.getRawStatusCode());
             customResponseEntity.setResponseMessage(exception.getResponseBodyAsString());
             testContext().setPayload(customResponseEntity);

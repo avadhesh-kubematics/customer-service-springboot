@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Slf4j
 @RestController
 public class CustomerController {
@@ -19,7 +21,7 @@ public class CustomerController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Customer create(@RequestBody CustomerVO customerVO) {
+    public Customer create(@RequestBody @Valid CustomerVO customerVO) {
         log.info("CustomerController : create : Init..");
 
         Customer customer = customerService.create(customerVO);

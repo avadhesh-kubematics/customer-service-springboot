@@ -12,9 +12,9 @@ public class CustomerErrorStepDefinition implements En, TestContextInterface {
 
     @Then("The API should return error {string} and status code {int}")
     public void the_API_should_return_error_and_status_code(String expectedErrorMsg, Integer expectedStatusCode) {
-        CustomResponseEntity payload = testContext().getPayload(CustomResponseEntity.class);
-        assertEquals(expectedStatusCode, payload.getStatusCode());
-        assertEquals(expectedErrorMsg, payload.getResponseMessage());
+        CustomResponseEntity customResponseEntity = testContext().getPayload(CustomResponseEntity.class);
+        assertEquals(expectedStatusCode, customResponseEntity.getStatusCode());
+        assertEquals(expectedErrorMsg, customResponseEntity.getResponseMessage());
         testContext().reset();
     }
 

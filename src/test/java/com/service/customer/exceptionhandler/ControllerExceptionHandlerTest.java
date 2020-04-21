@@ -32,7 +32,8 @@ class ControllerExceptionHandlerTest {
         HttpClientErrorException httpClientErrorException =
                 new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
 
-        ResponseEntity responseEntity = controllerExceptionHandler.handleHttpClientErrorException(httpClientErrorException);
+        ResponseEntity responseEntity = controllerExceptionHandler.
+                handleHttpClientErrorException(httpClientErrorException);
 
         assertEquals(500, responseEntity.getStatusCodeValue());
         assertEquals("Internal Server Error", responseEntity.getBody());

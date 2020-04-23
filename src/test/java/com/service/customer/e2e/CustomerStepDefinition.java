@@ -45,7 +45,7 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
 
     @Then("The API should return the Customer Data with Id")
     public void the_API_should_return_the_Customer_Data_with_Id() {
-        assertEquals(createResponseEntityResponseEntity.getStatusCodeValue(), CREATED.value());
+        assertEquals(CREATED.value(), createResponseEntityResponseEntity.getStatusCodeValue());
         Customer customerResponse = createResponseEntityResponseEntity.getBody();
         assertEquals("Abhishek", customerResponse.getFirstName());
         assertEquals("Rajput", customerResponse.getSurname());
@@ -71,7 +71,7 @@ public class CustomerStepDefinition extends SpringIntegration implements En, Tes
 
     @Then("The API should return the associated Customer Data")
     public void the_API_should_return_the_associated_Customer_Data() {
-        assertEquals(getCustomerResponseEntity.getStatusCodeValue(), OK.value());
+        assertEquals(OK.value(), getCustomerResponseEntity.getStatusCodeValue());
         Customer customerResponse = getCustomerResponseEntity.getBody();
         assertEquals("Abhishek", customerResponse.getFirstName());
         assertEquals("Rajput", customerResponse.getSurname());

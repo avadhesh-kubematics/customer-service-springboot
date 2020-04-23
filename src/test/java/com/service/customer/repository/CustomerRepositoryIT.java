@@ -29,8 +29,8 @@ public class CustomerRepositoryIT {
 
         Customer storedCustomer = customerRepository.save(customer);
 
-        assertEquals(storedCustomer.getFirstName(), "Iron");
-        assertEquals(storedCustomer.getSurname(), "Man");
+        assertEquals("Iron", storedCustomer.getFirstName());
+        assertEquals("Man", storedCustomer.getSurname());
     }
 
     @Test

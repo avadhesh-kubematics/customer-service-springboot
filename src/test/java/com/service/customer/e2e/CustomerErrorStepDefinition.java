@@ -23,7 +23,6 @@ public class CustomerErrorStepDefinition implements En, TestContextInterface {
     @Given("Customer provides a invalid customer id {string}")
     public void customer_provides_a_invalid_customer_id(String customerId) {
         testContext().set("customerId", customerId);
-        testContext().reset();
     }
 
     @Override

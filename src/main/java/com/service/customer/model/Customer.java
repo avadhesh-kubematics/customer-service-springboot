@@ -11,8 +11,7 @@ public class Customer {
     @Temporal(TemporalType.TIMESTAMP)
     public Date createdAt;
     @Id
-    @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq",
-            allocationSize = 1, initialValue = 1000)
+    @SequenceGenerator(name = "customer_id_seq", allocationSize = 1, initialValue = 1000)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
     private Integer id;
     private String firstName;
